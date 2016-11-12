@@ -3,10 +3,13 @@
 import os,sys
 from PIL import Image
 from PIL import ImageFilter
-img = Image.open("leeel.jpg")
+img = Image.open("lul.jpg")
 img = img.convert("RGBA")
 pic = img.load()
 datas = img.getdata()
+
+imgFil = Image.open("mustache.jpg")
+imgFil = imgFil.convert("RGBA")
 
 #difference function to calculate between two pixels
 def difference(item, item2):
@@ -53,9 +56,8 @@ def getNeighbors(x, y, width, height):
 				ans.append(pic[i, j])
 	return ans
 
-
 newData = []
-threshold = 15
+threshold = 10
 width, height = img.size
 
 newImage = Image.new("RGBA", img.size)
@@ -106,6 +108,12 @@ newImage.thumbnail(size, Image.ANTIALIAS)
 imageFin = newImage.filter(ImageFilter.SMOOTH_MORE)
 imageFin = imageFin.filter(ImageFilter.SMOOTH_MORE)
 imageFin = imageFin.filter(ImageFilter.SMOOTH_MORE)
+imageFin.thumbnail(size, Image.ANTIALIAS)
+
+#for i in range(width/2-30, width/2+31):
+#	for j in range(height/2-50, height/2+1):
+#		imageFin.putpixel((i, j), (0, 0, 0, 255))
+		
 
 imageFin.show()
 imageFin.save("hahah", "PNG")
