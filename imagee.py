@@ -2,7 +2,8 @@
 
 import os,sys
 from PIL import Image
-img = Image.open("leel.jpg")
+from PIL import ImageFilter
+img = Image.open("leeel.jpg")
 img = img.convert("RGBA")
 pic = img.load()
 datas = img.getdata()
@@ -54,7 +55,7 @@ def getNeighbors(x, y, width, height):
 
 
 newData = []
-threshold = 10
+threshold = 15
 width, height = img.size
 
 newImage = Image.new("RGBA", img.size)
@@ -102,6 +103,12 @@ for i in range(0, width, 5):
 
 size = width *2, height *2
 newImage.thumbnail(size, Image.ANTIALIAS)
-newImage.show()
-newImage.save("hahah", "PNG")
+imageFin = newImage.filter(ImageFilter.SMOOTH_MORE)
+imageFin = imageFin.filter(ImageFilter.SMOOTH_MORE)
+imageFin = imageFin.filter(ImageFilter.SMOOTH_MORE)
+
+imageFin.show()
+imageFin.save("hahah", "PNG")
+#newImage.show()
+#newImage.save("hahah", "PNG")
 
