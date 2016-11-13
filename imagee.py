@@ -4,7 +4,12 @@ import os,sys
 from PIL import Image
 from PIL import ImageFilter
 from pprint import pprint as pp
-img = Image.open("thisthisthis.jpg")
+import os
+import glob
+
+path = "/Users/joyhsu0504/Dropbox/CalHacks2016/faces"
+newest = max(glob.iglob('*.png'), key=os.path.getctime)
+img = Image.open(newest)
 img = img.convert("RGBA")
 pic = img.load()
 datas = img.getdata()
@@ -120,7 +125,7 @@ def getNeighbors(x, y, width, height):
 	return ans
 
 newData = []
-threshold = 10
+threshold = 15
 width, height = img.size
 
 newImage = Image.new("RGBA", img.size)
@@ -179,14 +184,16 @@ imageFin = imageFin.filter(ImageFilter.SMOOTH_MORE)
 
 
 #imageFin.show()
-imageFin.save("hahah.png")
+imageFin.save("hahah.jpg")
 imageFin.show()
+
+imageFin.save('/Users/joyhsu0504/Dropbox/CalHacks2016/processed/photo.jpg', 'JPEG')
 
 #newImage.show()
 #newImage.save("hahah", "PNG")
 
 '''if __name__ == '__main__':
-	imgname = 'hahah.png'
+	imgname = 'hahah.jpg'
 	img = Image.open(imgname)
 	w, h = img.size
 
