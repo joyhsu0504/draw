@@ -6,10 +6,18 @@ from PIL import ImageFilter
 from pprint import pprint as pp
 import os
 import glob
+import numpy as np
+from matplotlib import pyplot as plt
+import matplotlib.image as mpimg
+from path import Path
+import time
 
-path = "/Users/joyhsu0504/Dropbox/CalHacks2016/faces"
-newest = max(glob.iglob('*.png'), key=os.path.getctime)
-img = Image.open(newest)
+d = Path("/Users/joyhsu0504/Dropbox/CalHacks2016/faces/")
+while len(d.files()) == 0:
+	time.sleep(20)
+imgpath = d.files()[0]
+img = Image.open(imgpath)
+
 img = img.convert("RGBA")
 pic = img.load()
 datas = img.getdata()
@@ -184,10 +192,11 @@ imageFin = imageFin.filter(ImageFilter.SMOOTH_MORE)
 
 
 #imageFin.show()
-imageFin.save("hahah.jpg")
+#imageFin.save("hahah.jpg")
 imageFin.show()
 
-imageFin.save('/Users/joyhsu0504/Dropbox/CalHacks2016/processed/photo.jpg', 'JPEG')
+imageFin.save('/Users/joyhsu0504/Dropbox/CalHacks2016/processed/photo.jpg', 'JPG')
+imgpath.remove()
 
 #newImage.show()
 #newImage.save("hahah", "PNG")
